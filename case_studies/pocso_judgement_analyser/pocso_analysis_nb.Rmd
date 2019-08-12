@@ -1,0 +1,242 @@
+---
+title: "POCSO (The Protection of Children from Sexual Offences Act, 2012) - Judgement Analysis"
+output: 
+  html_document:
+    df_print: default
+    number_sections: yes
+    self_contained: no
+    toc: yes
+    toc_depth: 2
+    toc_float:
+      collapsed: no
+      
+---
+<link rel="stylesheet" type="text/css" href="include/style.css">
+
+<!-- From https://stackoverflow.com/a/37839683/1297830 -->
+<link rel="stylesheet" type="text/css" href="include/hideOutput.css">
+<script src="include/hideOutput.js"></script>
+
+<br />Last updated: `r format(Sys.time(), '%d %B, %Y')` (See [changelog](https://github.com/CivicDataLab/POCSO_case_law_analysis/commits/master)).
+
+```{r Report options, include=FALSE}
+# Options for building this document
+knitr::opts_chunk$set(
+  fig.height=4, 
+  fig.width=6, 
+  fig.align='center',
+  message=FALSE,
+  warning=FALSE
+)
+```
+
+***
+
+[![](CDL_banner.png)](https://civicdatalab.in/)
+
+***
+
+# The POCSO act
+
+[![](the_POCSO_act.png)](https://indiacode.nic.in/handle/123456789/2079?view_type=search&sam_handle=123456789/1362)
+
+The raw text of this act can be accessed at the [Indiacode](https://indiacode.nic.in/bitstream/123456789/2079/4/A2012-32.pdf) website  
+
+# Objective of the analysis 
+
+POCSO case-laws can be accessed from the District Courts portal - [Ecourts](). Mining these datasets, one can easily analyse the metadata related to a case such as hearing dates, judge, petitioner and police station details, etc. But important variables related to a victim and the accused are hidden in the judgement, which is a textual representation of a proceedings inside the court accompanied by the final order for the case. Reading multiple judgements, we found patterns where we were able to extract some of these variables and through this brief analysis, we aim to figure out what all is possible if we can extract hidden entities present in a judgement. 
+
+Current analysis is a WIP. 
+
+
+# Scope of the analysis
+
+**Region**: For the purpose of this pilot, we are doing a textual analysis of some judgements from the Thane District of Maharashtra. Here are some numbers 
+
+**Timeline**: 2013 - 2019 (March)
+
+**Case Type**: All cases (with and without judgement)
+
+**Total cases**: 4,181
+
+**Total judgements**: 1,326
+
+# When are POCSO cases registered and disposed
+
+Below graphs show a yearly, monthly and a daily trend of POCSO cases as per tee registration dates and the data of decision.
+
+```{r Declaring libs, include=FALSE}
+library(readr)
+library(dplyr)
+library(ggplot2)
+library(ggTimeSeries)
+library(stringr)
+library(quanteda)
+```
+
+```{r reading input files - case dates, include=FALSE}
+date_wise_cases <- read_csv("date_wise_cases.csv", 
+col_types = cols(all_dates = col_date(format = "%Y-%m-%d")))
+
+all_details <- read_csv("../judgements/all_details.csv", 
+                        col_types = cols(date_of_decision = col_date(format = "%Y-%m-%d"), 
+                        filing_date = col_date(format = "%Y-%m-%d"), 
+                        registration_date = col_date(format = "%Y-%m-%d")), 
+                        na = "empty")
+all_details$judgement_year <- lubridate::year(all_details$date_of_decision)
+all_details$judgement_year[all_details$judgement_flag == 0] <- NA_character_
+judgement_details <- all_details %>% group_by(judgement_year) %>%
+summarise(total_judgements = sum(judgement_flag)) %>% data.frame()
+judgement_details$judgement_year <- as.numeric(judgement_details$judgement_year)
+
+yearly_cases <- date_wise_cases %>% group_by(year_date) %>% summarise(total_cases_registered = sum(case_registered)) %>% data.frame()
+
+yearly_cases <- left_join(yearly_cases, judgement_details, by=c('year_date'= 'judgement_year'))
+
+yearly_cases <- reshape2::melt(yearly_cases,id.vars = 'year_date')
+
+monthly_cases <- date_wise_cases %>% group_by(month_date) %>% summarise(total_cases_registered = sum(case_registered),
+                                      total_cases_decided= sum(case_decided)) %>% data.frame()
+```
+
+## Yearly Case Distribution
+```{r plotting yearly cases, echo=FALSE}
+ggplot(yearly_cases, aes(x = year_date, y=value, fill=variable)) +geom_bar (stat = 'identity') + xlab('Year') + ylab('# registered cases') + ggtitle('Yearly distribution of registered cases and cases with reported judgements',subtitle =  '2013 - 2019 (till March)') + scale_x_continuous(breaks = (unique(yearly_cases$year_date))) + theme_minimal()
+
+```
+
+## Monthly Case Distribution
+```{r Momth wise trends in registered cases, echo=FALSE}
+# https://stackoverflow.com/questions/20524408/how-do-you-order-months-in-ggplot
+
+monthly_cases$id <- c(4,8,12,2,1,7,6,3,5,11,10,9)
+monthly_cases <- monthly_cases[order(monthly_cases$id),]
+ggplot(monthly_cases, aes(x = reorder(month_date,id), y=total_cases_registered)) +geom_bar (stat = 'identity') + xlab('Year') + ylab('# registered cases') + ggtitle('Month wise trend of case registrations') +  theme_minimal()
+```
+
+## Daily distribution of POCSO cases in 2018
+```{r Calendar plot of cases registered, echo=FALSE, warning=FALSE}
+calendar_heatmap <-  ggplot_calendar_heatmap(
+   date_wise_cases[date_wise_cases$year_date == 2018,],
+   'all_dates',
+   'case_registered'
+)
+
+# adding some formatting
+calendar_heatmap + 
+   xlab(NULL) + 
+   ylab(NULL) + 
+   scale_fill_continuous(low = 'green', high = 'red') + theme_minimal()
+```
+
+#  Analysis on convictions and acquittals in POCSO cases
+
+> The below analysis is done for reported judgements only. The above plots show that the year 2018 had the maximum number of judgements, but the most reported judgements were from the year 2015
+
+- Several reports around POCSO cases have shown a trend where the victim is often acquitted at the end of the trial. There have been very few convictions in these cases. Let's see if a similar trend is observed when we analysed the **final orders** passed in these judgements
+
+- Analyse age of the victims - This is an important variable given the context of this act and it is not available directly as a variable from the metadata through Ecourts. 
+
+- We will also try to see if there are yearly patterns in convctions and if age of the victim is somehow correlated with the acquittal of the accussed
+
+```{r Reading processed judgements file, include=FALSE}
+all_judgements_text <- data.table::fread("processed_judgements.csv", data.table = FALSE)
+all_judgements_text$convicted_flag <- 'Not convicted'
+all_judgements_text$convicted_flag[all_judgements_text$convicted_count > 0] <- 'Convicted'
+```
+
+## Yearly convictions
+```{r Yearly trend of convictions, echo=FALSE, warning=FALSE}
+ggplot(all_judgements_text, aes(x = judgement_year)) + geom_bar(aes(fill=convicted_flag)) + ggtitle("Yearly trend of convictions ", subtitle = 'For all cases with a reported judgement') + xlab('Judgement Year') + ylab('# POCSO cases') + scale_x_continuous(breaks = unique(all_judgements_text$judgement_year)) + theme_minimal()
+```
+
+## Yearly trends of POCSO judgements as per victim's age
+
+```{r trend of POCSO cases yearly vs victims age, echo=FALSE, warning=FALSE}
+ggplot(all_judgements_text, aes(x = judgement_year)) + geom_bar(aes(fill=victim_age_bucket)) +xlab('Year of Judgement') + ylab('# POCSO cases') + ggtitle('Total #Judgements as per victims age ') + theme_minimal()
+```
+
+
+## Accussed convicted vs Age of the Victim
+```{r convictions vs age of the victim, echo=FALSE}
+ggplot(all_judgements_text, aes(x = victim_age_bucket)) + geom_bar(aes(fill=convicted_flag)) + ggtitle("Convictions as per the age of the victim", subtitle = 'For all cases with a reported judgement') + xlab('Age of the victim') + ylab('# POCSO cases') + theme_minimal()
+```
+
+# Textual analysis on orders passed in Judgements
+
+Analysing the final orders passed in the judgements. We obsereved some patterns:
+
+- Bail orders are a common occurence across judgements
+- High frequency of the work *convictions* may tell us that either the person convicted has been booked for multiple acts and sections
+- If the words *acquitted* and *convicted* are present in the same judgement, then there:
+  - can be multiple people involved in the incident out of which some are
+convicted and some are acquitted
+  - a single accussed is convicted under some acts and acquitted under other[s]
+
+Let's look at the wordclouds:
+
+- For all orders
+- For orders where the accused was convicted
+
+## For all orders
+```{r Order passed in POCSO judgement, echo=FALSE}
+order_dfm <- dfm(all_judgements_text$order_verb_adj, remove = stopwords("english"), remove_punct = TRUE)
+
+textplot_wordcloud(order_dfm, min_count = 6, random_order = FALSE,
+                   rotation = .25, 
+                   color = RColorBrewer::brewer.pal(8,"Dark2"))
+
+```
+
+
+## For all orders where the accussed was convicted
+
+```{r Order passed in POCSO when the victim is convicted, echo=FALSE}
+order_dfm <- dfm(all_judgements_text$order_verb_adj[all_judgements_text$convicted_count >0], remove = stopwords("english"), remove_punct = TRUE)
+textplot_wordcloud(order_dfm, min_count = 6, random_order = FALSE,
+                   rotation = .25, 
+                   color = RColorBrewer::brewer.pal(8,"Dark2"))
+```
+
+## Frequency of words in an order of conviction
+```{r Freq of words in a judgement when victim is convicted, echo=FALSE}
+features_order_dfm <- textstat_frequency(order_dfm, n = 70)
+
+# Sort by reverse frequency order
+features_order_dfm$feature <- with(features_order_dfm, reorder(feature, -frequency))
+ggplot(features_order_dfm, aes(x = feature, y = frequency)) +
+    geom_point() + 
+    theme(axis.text.x = element_text(angle = 90, hjust = 1))
+```
+
+
+# Search for keywords with context
+
+A judgement is a treasure trove of information. In our analysis we found several important keywords which can be used to categorise judgement in several buckets and understand them better. This can help the policy makers to understand these cases efficiently and design policies accordingly to prevent the occurrance of this crime. To showcase the capabilities, we tried finding the occurrance of the word **whatsapp** in judgements to see where and how it was used. Please check the table below for the results.
+
+> The first coulmn displays the ID of the judgement
+
+```{r Search for keywords within a judgement, echo=FALSE, message=FALSE, warning=FALSE, paged.print=TRUE}
+judgement_corpus <- corpus(all_judgements_text$text)
+judgement_kwic <- kwic(judgement_corpus, pattern = "whatsapp", valuetype = "regex")
+DT::datatable(judgement_kwic, 
+    rownames = FALSE,
+    options = list(
+      searching=FALSE, 
+      lengthChange=FALSE, 
+      ordering=FALSE, 
+      autoWidth=TRUE, 
+      bPaginate=TRUE, 
+      bInfo=TRUE, 
+      paging=TRUE
+    )
+  )
+```
+
+***
+
+[![](CDL_footer.png)](https://civicdatalab.in/)
+
+***
+
+<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
