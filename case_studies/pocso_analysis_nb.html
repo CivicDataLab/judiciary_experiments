@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title>POCSO (The Protection of Children from Sexual Offences Act, 2012) - Judgement Analysis</title>
+
+<script src="pocso_analysis_nb_files/jquery-1.12.4/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="pocso_analysis_nb_files/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="pocso_analysis_nb_files/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="pocso_analysis_nb_files/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="pocso_analysis_nb_files/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="pocso_analysis_nb_files/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="pocso_analysis_nb_files/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="pocso_analysis_nb_files/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="pocso_analysis_nb_files/navigation-1.1/tabsets.js"></script>
+<link href="pocso_analysis_nb_files/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="pocso_analysis_nb_files/highlightjs-9.12.0/highlight.js"></script>
+<script src="pocso_analysis_nb_files/htmlwidgets-1.2/htmlwidgets.js"></script>
+<link href="pocso_analysis_nb_files/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+<script src="pocso_analysis_nb_files/datatables-binding-0.4/datatables.js"></script>
+<link href="pocso_analysis_nb_files/dt-core-1.10.16/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="pocso_analysis_nb_files/dt-core-1.10.16/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="pocso_analysis_nb_files/dt-core-1.10.16/js/jquery.dataTables.min.js"></script>
+<link href="pocso_analysis_nb_files/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
+<script src="pocso_analysis_nb_files/crosstalk-1.0.0/js/crosstalk.min.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+  padding-left: 25px;
+  text-indent: 0;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">POCSO (The Protection of Children from Sexual Offences Act, 2012) - Judgement Analysis</h1>
+
+</div>
+
+
+<p><link rel="stylesheet" type="text/css" href="include/style.css"></p>
+<!-- From https://stackoverflow.com/a/37839683/1297830 -->
+<link rel="stylesheet" type="text/css" href="include/hideOutput.css">
+<script src="include/hideOutput.js"></script>
+<p><br />Last updated: 05 April, 2019 (See <a href="https://github.com/CivicDataLab/POCSO_case_law_analysis/commits/master">changelog</a>).</p>
+<hr />
+<p><a href="https://civicdatalab.in/"><img src="CDL_banner.png" /></a></p>
+<hr />
+<div id="the-pocso-act" class="section level1">
+<h1><span class="header-section-number">1</span> The POCSO act</h1>
+<p><a href="https://indiacode.nic.in/handle/123456789/2079?view_type=search&amp;sam_handle=123456789/1362"><img src="the_POCSO_act.png" /></a></p>
+<p>The raw text of this act can be accessed at the <a href="https://indiacode.nic.in/bitstream/123456789/2079/4/A2012-32.pdf">Indiacode</a> website</p>
+</div>
+<div id="objective-of-the-analysis" class="section level1">
+<h1><span class="header-section-number">2</span> Objective of the analysis</h1>
+<p>POCSO case-laws can be accessed from the District Courts portal - <a href="">Ecourts</a>. Mining these datasets, one can easily analyse the metadata related to a case such as hearing dates, judge, petitioner and police station details, etc. But important variables related to a victim and the accused are hidden in the judgement, which is a textual representation of a proceedings inside the court accompanied by the final order for the case. Reading multiple judgements, we found patterns where we were able to extract some of these variables and through this brief analysis, we aim to figure out what all is possible if we can extract hidden entities present in a judgement.</p>
+<p>Current analysis is a WIP.</p>
+</div>
+<div id="scope-of-the-analysis" class="section level1">
+<h1><span class="header-section-number">3</span> Scope of the analysis</h1>
+<p><strong>Region</strong>: For the purpose of this pilot, we are doing a textual analysis of some judgements from the Thane District of Maharashtra. Here are some numbers</p>
+<p><strong>Timeline</strong>: 2013 - 2019 (March)</p>
+<p><strong>Case Type</strong>: All cases (with and without judgement)</p>
+<p><strong>Total cases</strong>: 4,181</p>
+<p><strong>Total judgements</strong>: 1,326</p>
+</div>
+<div id="when-are-pocso-cases-registered-and-disposed" class="section level1">
+<h1><span class="header-section-number">4</span> When are POCSO cases registered and disposed</h1>
+<p>Below graphs show a yearly, monthly and a daily trend of POCSO cases as per tee registration dates and the data of decision.</p>
+<div id="yearly-case-distribution" class="section level2">
+<h2><span class="header-section-number">4.1</span> Yearly Case Distribution</h2>
+<p><img src="pocso_analysis_nb_files/figure-html/plotting%20yearly%20cases-1.png" width="576" style="display: block; margin: auto;" /></p>
+</div>
+<div id="monthly-case-distribution" class="section level2">
+<h2><span class="header-section-number">4.2</span> Monthly Case Distribution</h2>
+<p><img src="pocso_analysis_nb_files/figure-html/Momth%20wise%20trends%20in%20registered%20cases-1.png" width="576" style="display: block; margin: auto;" /></p>
+</div>
+<div id="daily-distribution-of-pocso-cases-in-2018" class="section level2">
+<h2><span class="header-section-number">4.3</span> Daily distribution of POCSO cases in 2018</h2>
+<p><img src="pocso_analysis_nb_files/figure-html/Calendar%20plot%20of%20cases%20registered-1.png" width="576" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="analysis-on-convictions-and-acquittals-in-pocso-cases" class="section level1">
+<h1><span class="header-section-number">5</span> Analysis on convictions and acquittals in POCSO cases</h1>
+<blockquote>
+<p>The below analysis is done for reported judgements only. The above plots show that the year 2018 had the maximum number of judgements, but the most reported judgements were from the year 2015</p>
+</blockquote>
+<ul>
+<li><p>Several reports around POCSO cases have shown a trend where the victim is often acquitted at the end of the trial. There have been very few convictions in these cases. Let’s see if a similar trend is observed when we analysed the <strong>final orders</strong> passed in these judgements</p></li>
+<li><p>Analyse age of the victims - This is an important variable given the context of this act and it is not available directly as a variable from the metadata through Ecourts.</p></li>
+<li><p>We will also try to see if there are yearly patterns in convctions and if age of the victim is somehow correlated with the acquittal of the accussed</p></li>
+</ul>
+<div id="yearly-convictions" class="section level2">
+<h2><span class="header-section-number">5.1</span> Yearly convictions</h2>
+<p><img src="pocso_analysis_nb_files/figure-html/Yearly%20trend%20of%20convictions-1.png" width="576" style="display: block; margin: auto;" /></p>
+</div>
+<div id="yearly-trends-of-pocso-judgements-as-per-victims-age" class="section level2">
+<h2><span class="header-section-number">5.2</span> Yearly trends of POCSO judgements as per victim’s age</h2>
+<p><img src="pocso_analysis_nb_files/figure-html/trend%20of%20POCSO%20cases%20yearly%20vs%20victims%20age-1.png" width="576" style="display: block; margin: auto;" /></p>
+</div>
+<div id="accussed-convicted-vs-age-of-the-victim" class="section level2">
+<h2><span class="header-section-number">5.3</span> Accussed convicted vs Age of the Victim</h2>
+<p><img src="pocso_analysis_nb_files/figure-html/convictions%20vs%20age%20of%20the%20victim-1.png" width="576" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="textual-analysis-on-orders-passed-in-judgements" class="section level1">
+<h1><span class="header-section-number">6</span> Textual analysis on orders passed in Judgements</h1>
+<p>Analysing the final orders passed in the judgements. We obsereved some patterns:</p>
+<ul>
+<li>Bail orders are a common occurence across judgements</li>
+<li>High frequency of the work <em>convictions</em> may tell us that either the person convicted has been booked for multiple acts and sections</li>
+<li>If the words <em>acquitted</em> and <em>convicted</em> are present in the same judgement, then there:
+<ul>
+<li>can be multiple people involved in the incident out of which some are convicted and some are acquitted</li>
+<li>a single accussed is convicted under some acts and acquitted under other[s]</li>
+</ul></li>
+</ul>
+<p>Let’s look at the wordclouds:</p>
+<ul>
+<li>For all orders</li>
+<li>For orders where the accused was convicted</li>
+</ul>
+<div id="for-all-orders" class="section level2">
+<h2><span class="header-section-number">6.1</span> For all orders</h2>
+<p><img src="pocso_analysis_nb_files/figure-html/Order%20passed%20in%20POCSO%20judgement-1.png" width="576" style="display: block; margin: auto;" /></p>
+</div>
+<div id="for-all-orders-where-the-accussed-was-convicted" class="section level2">
+<h2><span class="header-section-number">6.2</span> For all orders where the accussed was convicted</h2>
+<p><img src="pocso_analysis_nb_files/figure-html/Order%20passed%20in%20POCSO%20when%20the%20victim%20is%20convicted-1.png" width="576" style="display: block; margin: auto;" /></p>
+</div>
+<div id="frequency-of-words-in-an-order-of-conviction" class="section level2">
+<h2><span class="header-section-number">6.3</span> Frequency of words in an order of conviction</h2>
+<p><img src="pocso_analysis_nb_files/figure-html/Freq%20of%20words%20in%20a%20judgement%20when%20victim%20is%20convicted-1.png" width="576" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="search-for-keywords-with-context" class="section level1">
+<h1><span class="header-section-number">7</span> Search for keywords with context</h1>
+<p>A judgement is a treasure trove of information. In our analysis we found several important keywords which can be used to categorise judgement in several buckets and understand them better. This can help the policy makers to understand these cases efficiently and design policies accordingly to prevent the occurrance of this crime. To showcase the capabilities, we tried finding the occurrance of the word <strong>whatsapp</strong> in judgements to see where and how it was used. Please check the table below for the results.</p>
+<blockquote>
+<p>The first coulmn displays the ID of the judgement</p>
+</blockquote>
+<div id="htmlwidget-f1d0fd4d46b6a167bf11" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-f1d0fd4d46b6a167bf11">{"x":{"filter":"none","data":[["text86","text86","text137","text137","text137","text137","text137","text141","text141","text141","text142","text142","text142","text152","text152","text178","text178","text678","text767","text840","text840","text840","text840","text843","text850","text850","text850","text866","text900","text964","text975","text1098","text1304","text1306"],[1238,2429,354,437,1995,4226,8133,462,559,820,462,559,820,343,519,330,399,1776,638,285,1134,1474,1658,226,156,432,636,409,334,1029,712,187,453,168],[1238,2429,354,437,1995,4226,8133,462,559,820,462,559,820,343,519,330,399,1776,638,285,1134,1474,1658,226,156,432,636,409,334,1029,712,187,453,168],["clip of their intercourse through","accused Rahul @ Rohan through","uploaded on social networking '","has an account on '","uploaded on the social network","enquired with her about her","video clip on social network","Ankit Mandora contacted Rucha on","Exh . 1 chatting on","information received by them through","Ankit Mandora contacted Rucha on","Exh . 1 chatting on","information received by them through","clip on the internet ,","uploaded on the internet and","some obscene messages on her","created obscene messages from the","has forwarded a message on","to her daughter on the","20 years contacted victim on","No . 2 Akshay on","had contacted with him on","accused No . 2 on","when it was checked ,","would upload her photo on","will upload her photo on","saved in his mobile on","The accused side submitted certain","photographs on internet and via","admits the print out of",", Malaika Khan and also","it to his friends on","accused filed their messages on","her photos on Facebook ,"],["whatsapp","whatsapp","whatsapp","whatsapp","whatsapp","whatsapp","whatsapp","whatsapp","whatsapp","whatsapp","whatsapp","whatsapp","whatsapp","whatsapp","whatsapp","whatsapp","whatsapp","Whatsapp","WhatsApp","whatsapp","whatsapp","whatsapp","whatsapp","whatsapp","WhatsApp","WhatsApp","WhatsApp","whatsapp","Whatsapp","whatsapp","whatsapp","WhatsApp","WhatsApp","WhatsApp"],["and facebook . Then ,","conversation and facebook chatting ,","' and violated privacy of","' to which she replied","publicly , punishable under Section","account and then made request","publicly . Moreover , there","and he sent her nude",". 4 ] On 26","technology . Their custodial interrogation","and he sent her nude",". 4 ] On 26","technology . Their custodial interrogation","and social media and 2","and it was also sent",". Therefore , the report","and put­forth it to the","account of the victim intending","group . She immediately identified","and followed her and he","and it was resulted into","and there were sexual relation","and she was contacting physically","account was found and her","to defame her and also","and defame her and and","and then he dragged her","record chowing chatting between them","and called near . .","chatting between she and accused","messages and photographs of CCTV",". He also sent the","which shows that there is","and also threatened her to"],["whatsapp","whatsapp","whatsapp","whatsapp","whatsapp","whatsapp","whatsapp","whatsapp","whatsapp","whatsapp","whatsapp","whatsapp","whatsapp","whatsapp","whatsapp","whatsapp","whatsapp","whatsapp","whatsapp","whatsapp","whatsapp","whatsapp","whatsapp","whatsapp","whatsapp","whatsapp","whatsapp","whatsapp","whatsapp","whatsapp","whatsapp","whatsapp","whatsapp","whatsapp"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>docname<\/th>\n      <th>from<\/th>\n      <th>to<\/th>\n      <th>pre<\/th>\n      <th>keyword<\/th>\n      <th>post<\/th>\n      <th>pattern<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"lengthChange":false,"ordering":false,"autoWidth":true,"bPaginate":true,"bInfo":true,"paging":true,"columnDefs":[{"className":"dt-right","targets":[1,2]}],"order":[],"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<hr />
+<p><a href="https://civicdatalab.in/"><img src="CDL_footer.png" /></a></p>
+<hr />
+<p><a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</p>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
